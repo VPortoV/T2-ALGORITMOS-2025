@@ -49,6 +49,21 @@ public class SistemaImpressao{
         }
     }
 
+    public void busca(String nomeArquivo){
+        if (!tentaBuscar(() -> filaImpressao.busca(nomeArquivo)) && !tentaBuscar(() -> pilhaReimpressao.consulta(nomeArquivo))) {
+            System.out.println("FALHA: O arquivo '" + nomeArquivo + "' não se encontra no sistema.");
+        }
+    }
+
+    private boolean tentaBuscar(Runnable metodo){
+        try{
+            metodo.run();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+
     @Override
     public String toString(){
         return filaImpressao.toString() + "\n\n" + pilhaReimpressao.toString();

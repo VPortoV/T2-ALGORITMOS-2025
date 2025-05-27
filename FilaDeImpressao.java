@@ -27,12 +27,25 @@ public class FilaDeImpressao {
     private int proximaPosicao (int posicao) {
         return (posicao + 1) % dados.length;
     }
+
     public void enfileira (Arquivo a) {
         if (estaCheia()) throw new RuntimeException("FALHA: Não foi possível inserir o arquivo na fila pois ela se encontra cheia.");
         dados[ultimo] = a;
         ultimo = proximaPosicao(ultimo);
         ocupacao++;
     }
+
+    public Arquivo busca(String nomeArquivo){
+        if(estaVazia()) throw new RuntimeException("FALHA: Não foi possível imprimir o arquivo da fila pois ela está vazia.");
+        for(int i = 0; i < dados.length; i++){
+            if (dados[i].getNomeArquivo().equals(nomeArquivo)){
+                System.out.println("Arquivo '" + nomeArquivo + "' encontrado:\n\t-Posição: " + i + "°\n\t-Horário de Solicitação: " + dados[i].getHorarioSolicitacaoFormatado() + "\n");
+                return dados[i];
+            }
+        }
+        throw new RuntimeException("FALHA: Não foi possível encontrar '" + nomeArquivo + "' na pilha de reimpressão.\n");
+    }
+
     public Arquivo imprimir() {
         if (estaVazia()) throw new RuntimeException("FALHA: Não foi possível imprimir o arquivo da fila pois ela está vazia.");
         Arquivo a = dados[primeiro];

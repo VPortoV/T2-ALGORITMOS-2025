@@ -28,12 +28,17 @@ public class Teste {
                 sistema.adicionar(temp);
             }
 
+            sistema.busca("Boletim.pdf");
+            sistema.busca("Inexistente.fake");
+            
             System.out.println(sistema.toString());
             scanner.close();
             
             sistema.iniciarImpressoes();
-
+            
             System.out.println(sistema.toString());
+            
+            sistema.busca("Boletim.pdf");
         }
         catch(Exception e){
             System.out.println(e.getMessage());
